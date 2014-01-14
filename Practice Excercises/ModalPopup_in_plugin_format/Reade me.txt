@@ -1,4 +1,4 @@
 Developer: Bilal Shahzad
 
-Purpose: The purpose of this excercise is create a modal popup plugin.
+Purpose: The purpose of this exercise is create a modal popup plugin.
 

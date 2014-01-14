@@ -1,4 +1,4 @@
 Developer: Bilal Shahzad
 
-Purpose: The purpose of this excercise to make a span editable. User can click on span and after changes can save/cancel. span will be updated accordingly.
+Purpose: The purpose of this exercise to make a span editable. User can click on span and after changes can save/cancel. span will be updated accordingly.
 
