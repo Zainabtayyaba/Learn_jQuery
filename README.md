@@ -1,9 +1,9 @@
 Learn_jQuery
 ============
 
-I think learning of anything mainly consists of two parts (e.g. jQuery)
+I think learning of anything mainly consists of two parts (e.g. learning jQuery)
 
-1- Learning jQuery Systanx and features
+1- Learning of Syntax and features
 2- Using the learning in practical scenarios
 
 The prupose of this project is to show the use of jQuery in some real time scenarios.
