@@ -62,8 +62,14 @@
                 e.preventDefault();
 
                 //page size
-                var pageSize = $("#txtPageSize").val();
-
+                var pageSize = Number($("#txtPageSize").val());
+				
+				if(isNaN(pageSize) ||  pageSize<= 0)
+				{
+				 alert('Invalid Page Size');
+				 return;
+				}
+				
                 //get all elements which need to be converted to 'pages'
                 var paras = $(".main_wrapper p");
 
@@ -75,42 +81,25 @@
 
                 for (var i = 1; i <= pages; i++) {
 
-                    //find chunks of elements and wrap in a div, each junk represents a page
+                    /*find chunks of elements and wrap in a div, each junk represents a page
+					slice function gets element from array between two indexes
+					Let say pageSize = 3, and i=1, 
+					it means paras.slice(0,1*3) means give first three elements from array.
+					*/
                     paras.slice(startIndex, i * pageSize).wrapAll("<div class='page'/>");
 
                     //Store new start index
                     startIndex = i * pageSize;
-
+					
+					//Handle logic of navigation buttons for this page.
                     CreateNavButtonForPage(i);
 
                 }//End of For loop
 
-
-                var $next = $("<a href='#'>Previous</a>");
-
-                $next.click(function(){
-                    
-                    var $curDiv = $(".main_wrapper div.currentpage");
-                    var $next = $curDiv.next();
-
-                    if ($next.length > 0)
-                    {
-                        $curDiv.removeClass('currentpage').addClass('page');
-                        $next.removeClass('page').addClass('currentpage');
-                    }
-
-                    return false;
-                });
-
-
-                //$(".navlinks").append(")
-
                 /*At this point, our elements are converted to pages*/
 
-
-                //Find first button link and trigger its click event 
+                //Find first button link and trigger its click event to show first page by default.
                 $(".navlinks a:first").trigger('click');
-
 
                 //Return false makes sure that the event generator will not execute its default behavior
                 return false;
@@ -118,7 +107,7 @@
 
             function CreateNavButtonForPage(pageNo)
             {
-                //Create navigation link
+                //Create navigation link in memory
                 var btn = $("<a href='#'>" + pageNo + "</a>");
 
                 //Handle click event to navigate to specific page
@@ -130,14 +119,21 @@
                     $(this).addClass('selectedpg');
                     var pgNo = $(this).text();
 
-                    //Remove currentpage class and add 'page' class (to hide it)
+					/* 
+					Now we want that whatever is current page, it should not be current.
+                    Remove currentpage class and add 'page' class (to hide it)
+					*/
                     $(".main_wrapper div.currentpage").removeClass('currentpage').addClass('page');
-                    //Find our div by using page numer, remove 'page' class and add 'currentpage' class to it
+					
+					/* 
+					'nth-child' selector finds specific child element' 
+                    Find our div by using page numer, remove 'page' class and add 'currentpage' class to it
+					*/
                     $(".main_wrapper div.page:nth-child(" + pgNo + ")").removeClass('page').addClass('currentpage');
 
                 });
 
-                //Append this link to our navigation links DIV
+                //Append this link to our navigation links DIV to make it part of DOM
                 $(".navlinks").append(btn);
 
                 return false;
